@@ -257,6 +257,12 @@ header nav ul li .dropdown .drop-item .options-wrapper .options-container .optio
   align-items: center;
   justify-content: space-between;
 }
+header nav ul li .dropdown .drop-item .options-wrapper .options-container .option.isActive .display-toggle {
+  background: var(--green);
+}
+header nav ul li .dropdown .drop-item .options-wrapper .options-container .option.isActive .display-toggle svg {
+  display: block;
+}
 header nav ul li .dropdown .drop-item .options-wrapper .options-container .option .layout-container {
   width: 100%;
   height: 6.9rem;
@@ -311,12 +317,6 @@ header nav ul li .dropdown .drop-item .options-wrapper .options-container .optio
   display: flex;
   align-items: center;
   justify-content: center;
-}
-header nav ul li .dropdown .drop-item .options-wrapper .options-container .option .display-toggle.isActive {
-  background: var(--green);
-}
-header nav ul li .dropdown .drop-item .options-wrapper .options-container .option .display-toggle.isActive svg {
-  display: block;
 }
 header nav ul li .dropdown .drop-item .options-wrapper .options-container .option .display-toggle svg {
   display: none;
@@ -404,33 +404,29 @@ main {
 }
 
 .classic {
+  display: flex;
   -moz-column-gap: 2.1rem;
        column-gap: 2.1rem;
-  display: none;
-}
-.classic.isActive {
-  display: flex;
 }
 
-.masonry-wrapper {
+.masonry {
   width: 100%;
   height: auto;
-  display: none;
-}
-.masonry-wrapper.isActive {
   display: block;
+  -moz-columns: 4;
+       columns: 4;
+}
+.masonry .order-card {
+  margin-bottom: 2rem;
 }
 
 .split {
   width: 100%;
-  display: none;
+  display: flex;
   flex-wrap: wrap;
   -moz-column-gap: 2.1rem;
        column-gap: 2.1rem;
   row-gap: 2.1rem;
-}
-.split.isActive {
-  display: flex;
 }
 
 .order-card {
@@ -550,13 +546,15 @@ main {
   font-weight: 500;
   line-height: normal;
 }
-.order-card .card-prep-btn {
+.order-card .card-prep-btn,
+.order-card .card-complete-btn {
   width: 100%;
   padding: 3rem;
   background: white;
   display: none;
 }
-.order-card .card-prep-btn button {
+.order-card .card-prep-btn button,
+.order-card .card-complete-btn button {
   padding: 1.7rem 3.5rem;
   background: #42CD9E;
   color: #121212;
@@ -568,10 +566,12 @@ main {
   line-height: normal;
   border-radius: 0.7rem;
 }
-.order-card .card-prep-btn button .disable {
+.order-card .card-prep-btn button .disable,
+.order-card .card-complete-btn button .disable {
   display: none;
 }
-.order-card .card-prep-btn.isActive {
+.order-card .card-prep-btn.isActive,
+.order-card .card-complete-btn.isActive {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -580,6 +580,7 @@ main {
   width: 100%;
   position: relative;
   padding-bottom: 1.8rem;
+  background: white;
 }
 .order-card .card-body .disable-overlay {
   width: 100%;
@@ -597,11 +598,19 @@ main {
   display: flex;
   flex-direction: column;
 }
-.order-card .card-body .order-container .order-cat {
+.order-card .card-body .order-container.isComplete {
+  display: none;
+}
+.order-card .card-body .order-container .order-product-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.order-card .card-body .order-container .order-product-container .order-cat {
   padding: 1.2rem 1.9rem;
   background: var(--green);
 }
-.order-card .card-body .order-container .order-cat p {
+.order-card .card-body .order-container .order-product-container .order-cat p {
   color: #F0F7F7;
   font-family: var(--primary-font);
   font-size: 15px;
@@ -610,30 +619,32 @@ main {
   line-height: normal;
   text-transform: capitalize;
 }
-.order-card .card-body .order-container .order-body {
+.order-card .card-body .order-container .order-product-container .order-body {
   position: relative;
   height: auto;
 }
-.order-card .card-body .order-container .order-body .order {
+.order-card .card-body .order-container .order-product-container .order-body .order {
   display: flex;
+  cursor: pointer;
   align-items: center;
   justify-content: space-between;
+  background: white;
   padding: 2rem 1.8rem;
   border-block: solid 1px rgba(0, 0, 0, 0.4392156863);
 }
-.order-card .card-body .order-container .order-body .order:last-child {
+.order-card .card-body .order-container .order-product-container .order-body .order:last-child {
   border: none;
 }
-.order-card .card-body .order-container .order-body .order.isActive {
+.order-card .card-body .order-container .order-product-container .order-body .order.isActive {
   background: #E0E2E2;
 }
-.order-card .card-body .order-container .order-body .order .product-container {
+.order-card .card-body .order-container .order-product-container .order-body .order .product-container {
   display: flex;
   align-items: center;
   -moz-column-gap: 1.2rem;
        column-gap: 1.2rem;
 }
-.order-card .card-body .order-container .order-body .order .product-container .product-qty {
+.order-card .card-body .order-container .order-product-container .order-body .order .product-container .product-qty {
   width: 2.4rem;
   height: 2.4rem;
   padding: 0.7rem;
@@ -650,7 +661,7 @@ main {
   font-weight: 500;
   line-height: normal;
 }
-.order-card .card-body .order-container .order-body .order .product-container .product .product-name {
+.order-card .card-body .order-container .order-product-container .order-body .order .product-container .product .product-name {
   color: #121212;
   font-family: var(--primary-font);
   font-size: 18px;
@@ -658,7 +669,7 @@ main {
   font-weight: 500;
   line-height: normal;
 }
-.order-card .card-body .order-container .order-body .order .product-container .product .special {
+.order-card .card-body .order-container .order-product-container .order-body .order .product-container .product .special {
   color: #03AABC;
   font-family: var(--primary-font);
   font-size: 13px;
@@ -666,7 +677,7 @@ main {
   font-weight: 400;
   line-height: normal;
 }
-.order-card .card-body .order-container .order-body .order .checkmark {
+.order-card .card-body .order-container .order-product-container .order-body .order .checkmark {
   width: 2.4rem;
   height: 2.4rem;
   border-radius: 999px;
@@ -676,18 +687,19 @@ main {
   justify-content: center;
   position: relative;
 }
-.order-card .card-body .order-container .order-body .order .checkmark.isActive svg {
+.order-card .card-body .order-container .order-product-container .order-body .order .checkmark.isActive svg {
   display: block;
 }
-.order-card .card-body .order-container .order-body .order .checkmark input {
+.order-card .card-body .order-container .order-product-container .order-body .order .checkmark input {
   opacity: 0;
   position: absolute;
   cursor: pointer;
 }
-.order-card .card-body .order-container .order-body .order .checkmark svg {
+.order-card .card-body .order-container .order-product-container .order-body .order .checkmark svg {
   display: none;
 }
-.order-card .card-body .order-container .req-container {
+
+.req-container {
   margin-inline: 1.9rem;
   padding: 1.4rem;
   display: flex;
@@ -696,7 +708,7 @@ main {
   background: #E5E8E8;
   border-radius: 1rem;
 }
-.order-card .card-body .order-container .req-container h3 {
+.req-container h3 {
   color: #121212;
   font-family: var(--primary-font);
   font-size: 14px;
@@ -705,7 +717,7 @@ main {
   line-height: normal;
   text-transform: capitalize;
 }
-.order-card .card-body .order-container .req-container p {
+.req-container p {
   color: rgba(18, 18, 18, 0.4392156863);
   font-family: var(--primary-font);
   font-size: 13px;
@@ -806,23 +818,24 @@ footer .timeline-container .timeline .order .order-time {
   height: 100%;
   align-items: center;
   justify-content: center;
-  position: absolute;
   background: white;
   flex-direction: column;
   z-index: 8;
   display: none;
 }
-.closing-overlay.isActive {
-  display: flex;
-}
 
 .closing-container {
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   width: 100%;
   height: 100%;
+  padding-block: 2.4rem;
   flex-direction: column;
+  background: white;
+}
+.closing-container.isActive {
+  display: flex;
 }
 .closing-container .countdown-container {
   height: 107px;
@@ -838,7 +851,7 @@ footer .timeline-container .timeline .order .order-time {
 .closing-container .countdown-container .timer-indicator {
   position: absolute;
 }
-.closing-container .countdown-container .time {
+.closing-container .countdown-container .closing-time {
   position: absolute;
   font-family: var(--primary-font);
   font-size: 44px;
@@ -1003,9 +1016,12 @@ footer .timeline-container .timeline .order .order-time {
   height: 100%;
   z-index: 8;
   background: var(--delivery);
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
+}
+.order-close-overlay.isActive {
+  display: flex;
 }
 .order-close-overlay div {
   width: 50%;

@@ -8,6 +8,70 @@
     <script src="https://cdn.jsdelivr.net/npm/macy@2"></script>
 </head>
 <body>
+    <template>
+        <!-- card component -->
+        <section class="order-card">
+            <!-- card head -->
+            <section class="card-head">
+                <!-- card head info -->
+                <section class="order-info">
+                    <article class="order-info-head">
+                        <p class="name"></p>
+                        <p class="order-number"></p>
+                    </article>
+                    <article class="order-info-body">
+                        <p class="time"></p>
+                        <p class="order-timer">00:00:01</p>
+                    </article>
+                </section>
+            </section>
+            <!-- order category -->
+            <section class="card-cat">
+                <p></p>
+            </section>
+            <section class="card-prep-btn">
+                <button class="prep-btn">Start Preparing</button>
+            </section>
+            <section class="card-complete-btn">
+                <button class="complete-btn">Order Complete</button>
+            </section>
+            <!-- closing overlay -->
+            <section class="closing-container">
+                <section class="countdown-container">
+                        <svg class="timer-path" width="107" height="107" viewBox="0 0 107 107" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="53.5" cy="53.5" r="53" stroke="black" stroke-opacity="0.5"/>
+                        </svg>     
+                        <svg class="timer-indicator" width="107" height="101" viewBox="0 0 107 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <mask id="path-1-inside-1_16_760" fill="white">
+                            <path d="M107 53.5C107 44.0668 104.506 34.8012 99.7703 26.6427C95.0347 18.4843 88.2262 11.7229 80.035 7.04419C71.8438 2.36547 62.5612 -0.0642701 53.1282 0.00129216C43.6951 0.0668544 34.4472 2.62539 26.3218 7.41752C18.1964 12.2096 11.4826 19.065 6.86089 27.2885C2.23922 35.512 -0.125953 44.8113 0.00516856 54.2436C0.13629 63.676 2.75904 72.906 7.60752 80.9978C12.456 89.0897 19.3578 95.7557 27.6133 100.32L28.4862 98.7413C20.5092 94.3308 13.8401 87.8895 9.15511 80.0705C4.47013 72.2515 1.93582 63.3328 1.80912 54.2186C1.68242 45.1043 3.96783 36.1186 8.43366 28.1724C12.8995 20.2262 19.3869 13.602 27.2383 8.97151C35.0897 4.34099 44.0258 1.86873 53.1407 1.80538C62.2556 1.74202 71.2253 4.08983 79.1402 8.61078C87.0552 13.1317 93.6341 19.6651 98.2099 27.5484C102.786 35.4318 105.196 44.3849 105.196 53.5H107Z"/>
+                            </mask>
+                            <path d="M107 53.5C107 44.0668 104.506 34.8012 99.7703 26.6427C95.0347 18.4843 88.2262 11.7229 80.035 7.04419C71.8438 2.36547 62.5612 -0.0642701 53.1282 0.00129216C43.6951 0.0668544 34.4472 2.62539 26.3218 7.41752C18.1964 12.2096 11.4826 19.065 6.86089 27.2885C2.23922 35.512 -0.125953 44.8113 0.00516856 54.2436C0.13629 63.676 2.75904 72.906 7.60752 80.9978C12.456 89.0897 19.3578 95.7557 27.6133 100.32L28.4862 98.7413C20.5092 94.3308 13.8401 87.8895 9.15511 80.0705C4.47013 72.2515 1.93582 63.3328 1.80912 54.2186C1.68242 45.1043 3.96783 36.1186 8.43366 28.1724C12.8995 20.2262 19.3869 13.602 27.2383 8.97151C35.0897 4.34099 44.0258 1.86873 53.1407 1.80538C62.2556 1.74202 71.2253 4.08983 79.1402 8.61078C87.0552 13.1317 93.6341 19.6651 98.2099 27.5484C102.786 35.4318 105.196 44.3849 105.196 53.5H107Z" stroke="#42CD9E" stroke-width="2" mask="url(#path-1-inside-1_16_760)"/>
+                        </svg>                                           
+                        <p class="closing-time"></p>
+                </section>
+                <p class="timer-info">
+                    Closing...
+                </p>
+                <button class="undo-btn">
+                    Press To Undo
+                </button>
+            </section>
+            <!-- card body -->
+            <section class="card-body">
+                <!-- disabling overlay -->
+                <section class="disable-overlay"></section>
+                <!-- cancel overlay -->
+                <section class="order-close-overlay">
+                    <div>Order Canceled</div>
+                </section>
+                <!-- product container -->
+                <section class="order-container">
+                    <!-- order container -->
+
+                </section>
+            </section>
+        </section>
+    </template>
     <div class="wrapper">
         <section class="info-modal">
             <section class="info-container">
@@ -276,7 +340,7 @@
                                 <div class="options-wrapper">
                                     <p class="title">standard screen options</p>
                                     <div class="options-container">
-                                        <div class="option">
+                                        <div class="option" id="tiled-display">
                                             <div class="layout-container">
                                                 <img src="./public/tiled.svg" alt="tiled-layout">
                                             </div>
@@ -286,11 +350,10 @@
                                             <div class="display-toggle" id="tiled">
                                                 <svg width="9" height="7" viewBox="0 0 9 7" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M9 0.736018L2.82857 7L0 4.12901L0.725143 3.39299L2.82857 5.52274L8.27486 0L9 0.736018Z" fill="white"/>
-                                                </svg>
-                                                <input type="radio" data-target="#masonry-layout" data-toggle="#tiled" class="option-toggle">                      
+                                                </svg>                      
                                             </div>
                                         </div>
-                                        <div class="option">
+                                        <div class="option isActive" id="classic-display">
                                             <div class="layout-container">
                                                 <img src="./public/classic.svg" alt="tiled-layout">
                                             </div>
@@ -300,11 +363,10 @@
                                             <div class="display-toggle isActive" id="classic">
                                                 <svg width="9" height="7" viewBox="0 0 9 7" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M9 0.736018L2.82857 7L0 4.12901L0.725143 3.39299L2.82857 5.52274L8.27486 0L9 0.736018Z" fill="white"/>
-                                                </svg>
-                                                <input type="radio" checked data-target="#classic-layout" data-toggle="#classic" class="option-toggle">                              
+                                                </svg>                              
                                             </div>
                                         </div>
-                                        <div class="option">
+                                        <div class="option" id="split-display">
                                             <div class="layout-container">
                                                 <img src="./public/split.svg" alt="tiled-layout">
                                                 <img src="./public/split.svg" alt="tiled-layout">
@@ -315,8 +377,7 @@
                                             <div class="display-toggle" id="split">
                                                 <svg width="9" height="7" viewBox="0 0 9 7" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M9 0.736018L2.82857 7L0 4.12901L0.725143 3.39299L2.82857 5.52274L8.27486 0L9 0.736018Z" fill="white"/>
-                                                </svg>
-                                                <input type="radio" data-target="#split-layout" data-toggle="#split" class="option-toggle">                              
+                                                </svg>                              
                                             </div>
                                         </div>
                                     </div>
@@ -394,13 +455,7 @@
             </nav>
         </header>
         <main>
-            <section id="classic-layout" class="order-wrapper classic isActive">
-            </section>
-            <section class="masonry-wrapper" id="masonry-layout">
-                <section class="order-wrapper masonry grid">
-                </section>
-            </section>
-            <section id="split-layout" class="order-wrapper split">
+            <section id="classic-layout" class="order-wrapper classic">
             </section>
         </main>
         <footer>
@@ -410,7 +465,7 @@
             </section>
         </footer>
     </div>
-    <script src="./script/script.js"></script>
+    <script src="./script/script.js" type="module"></script>
     <script src="./script/masonry.js"></script>
 </body>
 </html>
